@@ -6,7 +6,13 @@ const Layout = () => {
       <Stack.Screen
         name="index"
         options={{
-          title: "News",
+          title: "Stories",
+        }}
+      />
+      <Stack.Screen
+        name="[id]"
+        options={{
+          title: "",
         }}
       />
     </Stack>

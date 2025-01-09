@@ -4,9 +4,9 @@ const Layout = () => {
   return (
     <Tabs>
       <Tabs.Screen
-        name="(news)"
+        name="(stories)"
         options={{
-          title: "News",
+          title: "Stories",
           headerShown: false,
           tabBarIcon: ({ color }) => (
             <FontAwesome size={24} name="comments" color={color} />
