@@ -9,8 +9,10 @@ patches/
 dist/
 web-build/
 expo-env.d.ts
+app-example/
 ios/
 android/
+assets/
 
 # Native
 *.orig.*
@@ -19,6 +21,9 @@ android/
 *.p12
 *.key
 *.mobileprovision
+*.keystore
+.idea/
+*.apk
 
 # Metro
 .metro-health-check*
@@ -38,7 +43,4 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
-app-example
-
 .vscode
-assets/

@@ -1,7 +1,4 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
-import { QueryFunctionContext, useQuery } from "react-query";
-import { getStory } from "@/utils/api";
 import { Story } from "@/utils/types";
 import { Link } from "expo-router";
 import { formatDistanceToNow } from "date-fns";
@@ -15,9 +12,16 @@ const StoryItem = ({ story }: StoryItemProps) => {
     <Link href={`/(app)/(tabs)/(stories)/${story.id}`} asChild>
       <TouchableOpacity style={styles.container}>
         <Text style={styles.title}>{story.title}</Text>
-        <View style={{ flexDirection: "row", marginTop: 5, gap: 8 }}>
-          <Text style={styles.author}>{story.by}</Text>
-          <Text style={styles.author}>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            marginTop: 5,
+            gap: 8,
+          }}
+        >
+          <Text style={styles.field}>{story.by}</Text>
+          <Text style={styles.field}>
             {formatDistanceToNow(new Date(story.time * 1000), {
               addSuffix: true,
             })}
@@ -32,16 +36,17 @@ export default StoryItem;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 20,
     borderBottomWidth: 1,
     borderBottomColor: "#ddd",
   },
   title: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
   },
-  author: {
-    fontSize: 12,
+  field: {
+    fontSize: 16,
     color: "#555",
   },
 });
