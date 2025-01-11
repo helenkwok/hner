@@ -114,7 +114,7 @@ const Page = () => {
           ),
           headerRight: () => (
             <RefreshButton
-              refreshing={isRefetching}
+              refreshing={isLoading || isRefetching}
               onRefresh={handleRefresh}
             />
           ),

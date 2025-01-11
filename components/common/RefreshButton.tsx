@@ -14,7 +14,7 @@ interface RefreshButtonProps {
   onRefresh: () => void;
 }
 
-const duration = 2000;
+const duration = 1000;
 const easing = Easing.bezier(0.25, -0.5, 0.25, 1);
 
 const RefreshButton = ({ refreshing, onRefresh }: RefreshButtonProps) => {
@@ -34,8 +34,12 @@ const RefreshButton = ({ refreshing, onRefresh }: RefreshButtonProps) => {
 
   return (
     <Animated.View style={[styles.buttonWrapper, animatedStyle]}>
-      <TouchableOpacity onPressIn={onRefresh}>
-        <Ionicons name="refresh" size={24} color="black" />
+      <TouchableOpacity onPressIn={onRefresh} disabled={refreshing}>
+        <Ionicons
+          name="refresh"
+          size={24}
+          color={refreshing ? "#777" : "black"}
+        />
       </TouchableOpacity>
     </Animated.View>
   );
