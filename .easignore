@@ -22,6 +22,7 @@ _.key
 _.mobileprovision
 _.keystore
 .idea/
+\*.ipa
 \*.apk
 
 # Metro

@@ -23,6 +23,7 @@ assets/
 *.mobileprovision
 *.keystore
 .idea/
+*.ipa
 *.apk
 
 # Metro
