@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
 import { useEffect } from "react";
 import Animated, {
   withTiming,
@@ -19,6 +19,7 @@ const easing = Easing.bezier(0.25, -0.5, 0.25, 1);
 
 const RefreshButton = ({ refreshing, onRefresh }: RefreshButtonProps) => {
   const sv = useSharedValue<number>(0);
+  const theme = useColorScheme();
 
   useEffect(() => {
     if (refreshing) {
@@ -38,7 +39,7 @@ const RefreshButton = ({ refreshing, onRefresh }: RefreshButtonProps) => {
         <Ionicons
           name="refresh"
           size={24}
-          color={refreshing ? "#777" : "black"}
+          color={refreshing ? "#777" : theme === "dark" ? "#fff" : "#000"}
         />
       </TouchableOpacity>
     </Animated.View>
