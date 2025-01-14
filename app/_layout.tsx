@@ -7,6 +7,7 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
 
 Sentry.init({
   dsn: "https://5c2f3bbf6b9c114f87846f4af96b7889@o4508596100268032.ingest.de.sentry.io/4508608368738384",
@@ -30,6 +31,7 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <QueryClientProvider client={queryClient}>
+        <StatusBar style="auto" />
         <Slot />
       </QueryClientProvider>
     </ThemeProvider>
