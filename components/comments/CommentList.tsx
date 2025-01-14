@@ -32,7 +32,7 @@ const CommentList = ({ commentIds, header }: CommentListProps) => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, paddingHorizontal: 10 }}>
       <FlatList
         data={commentList}
         keyExtractor={(item) => item.toString()}

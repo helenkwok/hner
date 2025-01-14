@@ -1,4 +1,9 @@
-import { StyleSheet, Text, View, useWindowDimensions } from "react-native";
+import {
+  StyleSheet,
+  useColorScheme,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import { useQuery } from "react-query";
 import { formatDistanceToNow } from "date-fns";
 import RenderHtml from "react-native-render-html";
@@ -6,6 +11,7 @@ import { getStory } from "@/utils/api";
 import useMarkDown from "@/hooks/useMarkDown";
 import CommmentList from "./CommentList";
 import CommentShimmer from "./CommentShimmer";
+import Text from "../common/Text";
 
 interface CommentItemProps {
   commentId: number;
@@ -13,6 +19,7 @@ interface CommentItemProps {
 
 const CommentItem = ({ commentId }: CommentItemProps) => {
   const { width } = useWindowDimensions();
+  const theme = useColorScheme();
 
   const { data: comment, isLoading } = useQuery({
     queryKey: ["comment", commentId.toString()],
@@ -48,7 +55,12 @@ const CommentItem = ({ commentId }: CommentItemProps) => {
         </Text>
       </View>
       {comment.text && (
-        <RenderHtml contentWidth={width} source={{ html: commentText }} />
+        <RenderHtml
+          defaultTextProps={{ selectable: true }}
+          contentWidth={width}
+          source={{ html: commentText }}
+          baseStyle={{ color: theme === "dark" ? "#fff" : "#000" }}
+        />
       )}
       <CommmentList commentIds={comment.kids} />
     </View>

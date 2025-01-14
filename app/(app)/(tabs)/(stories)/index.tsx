@@ -3,7 +3,6 @@ import {
   Platform,
   RefreshControl,
   StyleSheet,
-  Text,
   View,
 } from "react-native";
 import { useCallback, useRef, useState } from "react";
@@ -16,33 +15,8 @@ import { Stack } from "expo-router";
 import StoryTypeList from "@/components/stories/StoryTypeList";
 import StoryListShimmer from "@/components/stories/StoryListShimmer";
 import RefreshButton from "@/components/common/RefreshButton";
-
-const storyTypes = [
-  {
-    name: "topstories",
-    label: "Top Stories",
-  },
-  {
-    name: "newstories",
-    label: "New Stories",
-  },
-  {
-    name: "beststories",
-    label: "Best Stories",
-  },
-  {
-    name: "askstories",
-    label: "Ask Stories",
-  },
-  {
-    name: "showstories",
-    label: "Show Stories",
-  },
-  {
-    name: "jobstories",
-    label: "Job Stories",
-  },
-];
+import { storyTypes } from "@/utils/contants";
+import Text from "@/components/common/Text";
 
 const Page = () => {
   const queryClient = useQueryClient();
@@ -71,7 +45,7 @@ const Page = () => {
     []
   );
 
-  const renderProduct = useCallback(({ item }: { item: Story }) => {
+  const renderStory = useCallback(({ item }: { item: Story }) => {
     return <StoryItem story={item} />;
   }, []);
 
@@ -101,17 +75,7 @@ const Page = () => {
     <View style={styles.container}>
       <Stack.Screen
         options={{
-          headerTitle: () => (
-            <Text
-              style={[
-                Platform.OS === "ios"
-                  ? { fontSize: 18, fontWeight: "500" }
-                  : { fontSize: 20, fontWeight: "500" },
-              ]}
-            >
-              {storyTypes.find((type) => type.name === storyType)?.label}
-            </Text>
-          ),
+          title: storyTypes.find((type) => type.name === storyType)?.label,
           headerRight: () => (
             <RefreshButton
               refreshing={isLoading || isRefetching}
@@ -131,7 +95,7 @@ const Page = () => {
         <FlashList
           ref={flashListRef}
           data={stories}
-          renderItem={renderProduct}
+          renderItem={renderStory}
           keyExtractor={keyExtractor}
           estimatedItemSize={70}
           refreshControl={

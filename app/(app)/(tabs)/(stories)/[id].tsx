@@ -2,8 +2,8 @@ import { StyleSheet, Text, View } from "react-native";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { useQuery } from "react-query";
 import { getStory } from "@/utils/api";
-import CommentList from "@/components/comments/CommentList";
 import { Story } from "@/utils/types";
+import CommentList from "@/components/comments/CommentList";
 import StoryHeader from "@/components/stories/StoryHeader";
 import StoryShimmer from "@/components/stories/StoryShimmer";
 
@@ -47,6 +47,5 @@ export default Page;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 10,
   },
 });

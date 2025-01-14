@@ -1,10 +1,11 @@
 import {
   ScrollView,
   StyleSheet,
-  Text,
   TouchableOpacity,
+  useColorScheme,
   View,
 } from "react-native";
+import Text from "../common/Text";
 
 interface StoryTypeListProps {
   storyTypes: { name: string; label: string }[];
@@ -17,8 +18,17 @@ const StoryTypeList = ({
   storyType,
   setStoryType,
 }: StoryTypeListProps) => {
+  const theme = useColorScheme();
+
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          borderBottomColor: theme === "dark" ? "#333" : "#ddd",
+        },
+      ]}
+    >
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {storyTypes.map((type) => (
           <TouchableOpacity
@@ -31,14 +41,28 @@ const StoryTypeList = ({
               style={[
                 styles.button,
                 {
-                  borderBottomColor: type.name === storyType ? "#000" : "#ddd",
+                  borderBottomColor:
+                    type.name === storyType
+                      ? theme === "dark"
+                        ? "#ddd"
+                        : "#333"
+                      : theme === "dark"
+                      ? "#000"
+                      : "#fff",
                 },
               ]}
             >
               <Text
                 style={[
                   styles.buttonText,
-                  { color: type.name === storyType ? "#000" : "#555" },
+                  {
+                    color:
+                      type.name === storyType
+                        ? theme === "dark"
+                          ? "#fff"
+                          : "#000"
+                        : "#777",
+                  },
                 ]}
               >
                 {type.label}
@@ -57,7 +81,6 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
     gap: 10,
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
   },
@@ -65,11 +88,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 20,
     borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
   },
   buttonText: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#555",
   },
 });
