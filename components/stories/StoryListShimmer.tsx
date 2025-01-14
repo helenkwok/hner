@@ -1,16 +1,22 @@
-import { StyleSheet, View } from "react-native";
-import { createShimmerPlaceholder } from "react-native-shimmer-placeholder";
-import { LinearGradient } from "expo-linear-gradient";
-
-const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
+import { StyleSheet, useColorScheme, View } from "react-native";
+import ShimmerPlaceholder from "@/components/common/ShimmerPlaceholder";
 
 const StoryListShimmer = ({ length }: { length: number }) => {
+  const theme = useColorScheme();
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        { borderBottomColor: theme === "dark" ? "#333" : "#ddd" },
+      ]}
+    >
       {Array.from({ length }, (_, i) => i).map((item) => (
         <View key={item} style={styles.story}>
           <ShimmerPlaceholder style={styles.title} />
           <ShimmerPlaceholder style={styles.field} />
+          <View style={styles.preview}>
+            <ShimmerPlaceholder style={styles.field} />
+          </View>
         </View>
       ))}
     </View>
@@ -28,7 +34,6 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     gap: 8,
     borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
   },
   title: {
     height: 32,
@@ -39,5 +44,16 @@ const styles = StyleSheet.create({
     height: 20,
     width: "100%",
     borderRadius: 4,
+  },
+  preview: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 5,
+    gap: 8,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#bbb",
+    borderRadius: 8,
   },
 });
