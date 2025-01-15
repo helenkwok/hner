@@ -32,7 +32,7 @@ const CommentList = ({ commentIds, header }: CommentListProps) => {
   };
 
   return (
-    <View style={{ flex: 1, paddingHorizontal: 10 }}>
+    <View style={styles.container}>
       <FlatList
         data={commentList}
         keyExtractor={(item) => item.toString()}
@@ -40,6 +40,7 @@ const CommentList = ({ commentIds, header }: CommentListProps) => {
         ListHeaderComponent={header ? () => header : null}
         onEndReached={handleNextPage}
         onEndReachedThreshold={0.8}
+        removeClippedSubviews={false}
       />
     </View>
   );
@@ -47,4 +48,9 @@ const CommentList = ({ commentIds, header }: CommentListProps) => {
 
 export default CommentList;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 10,
+  },
+});
