@@ -5,13 +5,13 @@ import {
   View,
 } from "react-native";
 import { useQuery } from "react-query";
-import { formatDistanceToNow } from "date-fns";
 import RenderHtml from "react-native-render-html";
 import { getStory } from "@/utils/api";
 import useMarkDown from "@/hooks/useMarkDown";
 import CommmentList from "./CommentList";
 import CommentShimmer from "./CommentShimmer";
 import Text from "../common/Text";
+import { handleDate } from "@/utils/helpers";
 
 interface CommentItemProps {
   commentId: number;
@@ -48,11 +48,7 @@ const CommentItem = ({ commentId }: CommentItemProps) => {
     <View style={styles.container}>
       <View style={styles.fieldRow}>
         <Text>{comment.by}</Text>
-        <Text>
-          {formatDistanceToNow(new Date(comment.time * 1000), {
-            addSuffix: true,
-          })}
-        </Text>
+        <Text>{handleDate(comment.time)}</Text>
       </View>
       {comment.text && (
         <RenderHtml
@@ -62,7 +58,9 @@ const CommentItem = ({ commentId }: CommentItemProps) => {
           baseStyle={{ color: theme === "dark" ? "#fff" : "#000" }}
         />
       )}
-      <CommmentList commentIds={comment.kids} />
+      <View style={{ flex: 1 }}>
+        <CommmentList commentIds={comment.kids} />
+      </View>
     </View>
   );
 };

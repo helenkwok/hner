@@ -5,11 +5,11 @@ import {
   View,
 } from "react-native";
 import { Link } from "expo-router";
-import { formatDistanceToNow } from "date-fns";
 import { Story } from "@/utils/types";
 import useUrlPreview from "@/hooks/useUrlPreview";
 import StoryUrlPreview from "./StoryUrlPreview";
 import Text from "@/components/common/Text";
+import { handleDate } from "@/utils/helpers";
 
 interface StoryItemProps {
   story: Story;
@@ -33,11 +33,8 @@ const StoryItem = ({ story }: StoryItemProps) => {
           <Text style={styles.title}>{story.title}</Text>
           <View style={styles.row}>
             <Text style={styles.field}>{story.by}</Text>
-            <Text style={styles.field}>
-              {formatDistanceToNow(new Date(story.time * 1000), {
-                addSuffix: true,
-              })}
-            </Text>
+            <Text style={styles.field}>{story.kids && story.kids.length}</Text>
+            <Text style={styles.field}>{handleDate(story.time)}</Text>
           </View>
           {preview && <StoryUrlPreview preview={preview} />}
         </View>
